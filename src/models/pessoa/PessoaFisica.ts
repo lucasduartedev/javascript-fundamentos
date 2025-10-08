@@ -2,19 +2,19 @@ import Pessoa from "./Pessoa.js";
 
 export default class PessoaFisica extends Pessoa {
 
-    #cpf
+    private _cpf: string
 
-    constructor(nome, cpf) {
+    constructor(nome: string, cpf: string) {
         super(nome);
-        this.#cpf = cpf;
+        this._cpf = cpf;
     }
 
     get cpf() {
-        return this.#cpf
+        return this._cpf;
     }
 
-    set cpf(novoCpf) {
-        this.#cpf = novoCpf;
+    set cpf(novoCpf: string) {
+        this._cpf = novoCpf;
     }
 
     apresentar() {

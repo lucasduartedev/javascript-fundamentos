@@ -1,17 +1,12 @@
 export default class Pessoa {
-
-    #nome
-
+    _nome;
     constructor(nome) {
-        this.#nome = nome;
+        this._nome = nome;
     }
-
     get nome() {
-        return this.#nome
+        return this._nome;
     }
-
     set nome(novoNome) {
-        this.#nome = novoNome;
+        this._nome = novoNome;
     }
-
 }

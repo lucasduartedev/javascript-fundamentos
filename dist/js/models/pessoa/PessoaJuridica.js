@@ -1,25 +1,17 @@
 import Pessoa from "./Pessoa.js";
-
 export default class PessoaJuridica extends Pessoa {
-
-    #cnpj
-
+    _cnpj;
     constructor(nome, cnpj) {
         super(nome);
-        this.#cnpj = cnpj;
+        this._cnpj = cnpj;
     }
-
     get cnpj() {
-        return this.#cnpj;
+        return this._cnpj;
     }
-
     set cnpj(novoCnpj) {
-        this.#cnpj = novoCnpj;
+        this._cnpj = novoCnpj;
     }
-
     apresentar() {
-        return `Nome: ${this.nome} | CPF: ${this.cnpj}`;;
+        return `Nome: ${this.nome} | CNPJ: ${this.cnpj}`;
     }
-
 }
-
