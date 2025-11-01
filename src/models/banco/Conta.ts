@@ -34,38 +34,65 @@ export default class Conta {
         this._ativo = booleano;
     }
 
+    // * Métodos privados
+    private _statusSaldo(): string {
+        if(this._saldo >= 0) return 'Positivo';
+        return 'Negativo'
+    }
+    
     private _diminuirSaldo(valor: number) {
-        this.saldo -= valor;
+        this._saldo -= valor;
+    }
+    private _aumentarSaldo(valor: number) {
+        this._saldo += valor;
     }
 
-    private _aumentarSaldo(valor: number) {
-        this.saldo += valor;
+    // * Métodos
+    desativar() {
+        if(this._ativo == false) {
+            throw new Error('A conta já está desativada.');
+        }
+        this._ativo = false;
+    }
+    ativar() {
+        if(this._ativo == true) {
+            throw new Error('A conta já está ativada.');
+        }
+        this._ativo = true;
     }
 
     status() {
-        return `Conta: ${this.conta} | Saldo: R$ ${this.saldo} | Status: ${this.ativo}`;
-    }
-
-    sacar(valor: number) {
-        if(this.saldo >= valor && valor > 0) {
-            this._diminuirSaldo(valor);
-            console.log(`Sacado: R$ ${valor}`)
-        } else {
-            console.log(`Error ao sacar!`)
-        }
+        return `Conta: ${this.conta} | Saldo: R$ ${this._statusSaldo} | Status: ${this.ativo}`;
     }
 
     depositar(valor: number) {
-        if(valor > 0) {
-            this._aumentarSaldo(valor);
-            console.log(`Depositado: R$ ${valor}`)
+        if(this._ativo == false) {
+            throw new Error('Conta desativada não pode receber deposito.');
+        } else if(valor <= 0) {
+            throw new Error('Valor do depósito deve ser maior que zero (0).');
         } else {
-            console.log(`Error ao depositar!`)
+            this._aumentarSaldo(valor);
         }
     }
 
+    sacar(valor: number) {
+        if(this.ativo == false) {
+            throw new Error('Conta desativada não pode realizar saque.');
+        } else if(valor <= 0) {
+            throw new Error('Valor do saque deve ser maior que zero (0).');
+        } else if(valor <= this._saldo){
+            this._diminuirSaldo(valor);
+        }
+    }
+    
     transferir(contaDestino: Conta, valor: number) {
-        if(this.saldo >= valor && valor > 0) {
+        if(this.ativo == false) {
+            throw new Error('Conta desativada não pode realizar transferência.');
+        } else if(contaDestino.ativo == false) {
+            throw new Error('Conta destino desativada não pode receber valores.');
+        } else if(valor <= 0) {
+            throw new Error('Valor da transferência deve ser maior que zero (0).');
+        } else if(this._saldo >= valor) {
             this._diminuirSaldo(valor);
             contaDestino._aumentarSaldo(valor);
         }
