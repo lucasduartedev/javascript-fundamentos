@@ -34,9 +34,9 @@
 
     // Recommended Options
     // "moduleDetection": "force",
-    // "isolatedModules": true,
     // "noUncheckedSideEffectImports": true,
     // "verbatimModuleSyntax": true,
+    // "isolatedModules": true,
     
     "strict": true,
     "jsx": "react-jsx",
