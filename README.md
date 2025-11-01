@@ -6,7 +6,7 @@
 
 <p>Typescript será usado para facilitar o desenvolvimento de algumas funcionalidades e evitar erros durante a execução dos scripts.</p>
 
-<p></p>
+<p>Jest adicionado ao projeto para aprender/praticar testes unitários.</p>
 
 ## Tecnologias
 
