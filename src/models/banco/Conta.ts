@@ -35,11 +35,6 @@ export default class Conta {
     }
 
     // * Métodos privados
-    private _statusSaldo(): string {
-        if(this._saldo >= 0) return 'Positivo';
-        return 'Negativo'
-    }
-    
     private _diminuirSaldo(valor: number) {
         this._saldo -= valor;
     }
@@ -61,8 +56,19 @@ export default class Conta {
         this._ativo = true;
     }
 
-    status() {
-        return `Conta: ${this.conta} | Saldo: R$ ${this._statusSaldo} | Status: ${this.ativo}`;
+    alterarNomeConta(novaConta: string) {
+        if(this.conta == novaConta) {
+            throw new Error('Não pode alterar nome para o mesmo nome já cadastrado.');
+        } else if(novaConta.length < 4) {
+            throw new Error('Novo nome deve ter no mínimo 4 digitos.');
+        } else {
+            this.conta = novaConta;
+        }
+    }
+
+    status(): string {
+        let saldoStatus = this._saldo >= 0 ? 'Positivo' : 'Negativo';
+        return `Conta: ${this.conta} | Saldo: ${saldoStatus} | Status: ${this.ativo}`;
     }
 
     depositar(valor: number) {

@@ -17,6 +17,45 @@ describe('Suite - Banco', () => {
         expect(conta01.ativo).toBeTruthy();
     });
 
+    // * Getters: tipo de retorno
+    test('Deve retornar o tipo do atributo "CONTA" como string.', () => {
+        expect(typeof conta01.conta).toBe('string');
+    });
+
+    test('Deve retornar o tipo do atributo "SALDO" como number.', () => {
+        expect(typeof conta01.saldo).toBe('number');
+    });
+    
+    test('Deve retornar o tipo do atributo "ATIVO" como boolean.', () => {
+        expect(typeof conta01.ativo).toBe('boolean');
+    });
+
+    // * Getters
+    test('Deve retornar os atributos da conta corretamente.', () => {
+        expect(conta01.conta).toBe('0001');
+        expect(conta01.saldo).toBe(0);
+        expect(conta01.ativo).toBe(true);
+    });
+
+    // * Status
+    const contaTestStatusSaldo = new Conta('0147');
+    
+    test('Deve retornar status POSITIVO com saldo igual ou maior zero (0).', () => {
+        expect(contaTestStatusSaldo.status()).toContain('Positivo');
+    });
+    
+    const contaTestStatusSaldo2 = new Conta('0148');
+    contaTestStatusSaldo2.saldo = -1500
+    test('Deve retornar status NEGATIVO com saldo menor que zero (0).', () => {
+        expect(contaTestStatusSaldo2.status()).toContain('Negativo');
+    });
+
+    test('Deve verificar se método STATUS return uma string.', () => {
+        expect(typeof contaTestStatusSaldo2.status()).toBe('string');
+    });
+
+    // ! checar final da string: 'status'
+
     // * Ativar/Desativar conta
     const contaTestAtivo1 = new Conta('D0101');
     const contaTestAtivo2 = new Conta('D0202');
@@ -46,6 +85,28 @@ describe('Suite - Banco', () => {
         }).toThrow();
     });
 
+    // * alterar nome da conta
+    const contaTestAltararNome = new Conta('N0101');
+
+    test('Deve lançar erro ao tentar alterar o nome da conta para o nome existente.', () => {
+        expect(() => {
+            contaTestAltararNome.alterarNomeConta('N0101');
+        }).toThrow();
+    });
+
+    test('Deve lançar erro ao tentar alterar nome da conta menor que 4 digitos.', () => {
+        expect(() => {
+            contaTestAltararNome.alterarNomeConta('asd');
+        }).toThrow();
+    });
+
+    const contaTestAltararNome2 = new Conta('N0102');
+    test('Deve alterar nome com sucesso.', () => {
+        let novoNome: string = 'N123';
+        contaTestAltararNome2.alterarNomeConta(novoNome);
+        expect(contaTestAltararNome2.conta).toBe(novoNome);
+    });
+    
     // * Deposito
     test('Deve realizar deposito com sucesso.', () => {
         const conta = new Conta('0101');
@@ -68,7 +129,6 @@ describe('Suite - Banco', () => {
     // * Sacar
     const contaTestSaque = new Conta('0123');
     contaTestSaque.depositar(1000);
-    log('Saldo: ' + contaTestSaque.saldo);
     
     test('Deve realizar saque com sucesso', () => {
         contaTestSaque.sacar(100);
