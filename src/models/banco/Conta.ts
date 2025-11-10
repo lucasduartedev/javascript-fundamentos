@@ -1,8 +1,11 @@
+import Cartao from "./Cartao.js";
+
 export default class Conta {
 
     private _conta: string
     private _saldo: number
     private _ativo: boolean
+    private _cartoes: Array<Cartao> = [];
 
     // static numeroDeContas = 0
 
@@ -32,6 +35,13 @@ export default class Conta {
     }
     set ativo(booleano) {
         this._ativo = booleano;
+    }
+
+    get cartoes(): Cartao[] {
+        return this._cartoes;
+    }
+    set cartao(novoCartao: Cartao) {
+        this._cartoes.push(novoCartao);
     }
 
     // * Métodos privados
@@ -102,6 +112,13 @@ export default class Conta {
             this._diminuirSaldo(valor);
             contaDestino._aumentarSaldo(valor);
         }
+    }
+
+    concederCartao(novoCartao: Cartao) {
+        if(this._cartoes.length >= 3) {
+            throw new Error('A conta atingiu o limite máxido de cartões expedidos.');
+        }
+        this._cartoes.push(novoCartao);
     }
 
 }
