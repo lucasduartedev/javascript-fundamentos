@@ -1,3 +1,4 @@
+import Cartao from "../../../models/banco/Cartao";
 import Conta from "../../../models/banco/Conta"
 import {log, error} from "console"
 
@@ -178,6 +179,32 @@ describe('Suite - Banco', () => {
         contaTestTransferencia_1.transferir(contaTestTransferencia_2, 100);
         expect(contaTestTransferencia_1.saldo).toEqual(900);
         expect(contaTestTransferencia_2.saldo).toEqual(100);
+    });
+
+    // * conceder cartao
+    const contaTestCartao01 = new Conta('C0101');
+    const cartaoTest01 = new Cartao(1, '1234-1234', '123');
+    const cartaoTest02 = new Cartao(9, '4545-4545', '456');
+    const cartaoTest03 = new Cartao(5, '7978-7978', '789');
+    const cartaoTest04 = new Cartao(8, '9876-9876', '999');
+
+    cartaoTest01.ativarCartao();
+    cartaoTest02.ativarCartao();
+    cartaoTest03.ativarCartao();
+    cartaoTest04.ativarCartao();
+
+    test('Deve cadastrar novo cartao a lista de cartões', () => {
+        contaTestCartao01.concederCartao(cartaoTest01);
+        expect(contaTestCartao01.cartoes.length).toBe(1);
+    });
+    
+    // limite de três(3) cartões por usuário
+    test('Deve lancar erro ao tentar adicionar um quarto cartão', () => { 
+        contaTestCartao01.concederCartao(cartaoTest02);
+        contaTestCartao01.concederCartao(cartaoTest03);
+        expect(() => {
+            contaTestCartao01.concederCartao(cartaoTest04);
+        }).toThrow();
     });
 
 });

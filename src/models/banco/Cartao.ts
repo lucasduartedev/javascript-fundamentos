@@ -7,7 +7,7 @@ export default class Cartao {
     private _codigo: string;
     private _limite: number = 1000.0;
     private _compras: Array<Compra> = [];
-    private _ativo: boolean = true;
+    private _ativo: boolean = false;
 
     constructor(
         id: number,
@@ -62,14 +62,23 @@ export default class Cartao {
     }
 
     desativarCartao() {
-
+        if(this._ativo == false) {
+            throw new Error('O cartão já está desativado');
+        }
+        this._ativo = false;
     }
-
+    
     ativarCartao() {
-
+        if(this._ativo == true) {
+            throw new Error('O cartão já está ativado');
+        }
+        this._ativo = true;
     }
 
-    validarCompra() {
+    validarCompra(compra: Compra) {
+        if(this._ativo == false) {
+            throw new Error('Cartão desativado!');
+        }
         
     }
 
