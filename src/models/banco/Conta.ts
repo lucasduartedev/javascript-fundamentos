@@ -16,24 +16,24 @@ export default class Conta {
         // Conta.numeroDeContas += 1;
     }
 
-    get conta() {
+    get conta(): string {
         return this._conta;
     }
-    set conta(novaConta) {
+    set conta(novaConta: string) {
         this._conta = novaConta;
     }
 
-    get saldo() {
+    get saldo(): number {
         return this._saldo;
     }
-    set saldo(novoSaldo) {
+    set saldo(novoSaldo: number) {
         this._saldo = novoSaldo;
     }
 
-    get ativo() {
+    get ativo(): boolean {
         return this._ativo;
     }
-    set ativo(booleano) {
+    set ativo(booleano: boolean) {
         this._ativo = booleano;
     }
 
