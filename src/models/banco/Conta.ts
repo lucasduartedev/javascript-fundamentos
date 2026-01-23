@@ -1,4 +1,5 @@
 import Cartao from "./Cartao.js";
+import PessoaFisica from "./PessoaFisica.js";
 
 export default class Conta {
 
@@ -6,13 +7,15 @@ export default class Conta {
     private _saldo: number
     private _ativo: boolean
     private _cartoes: Array<Cartao> = [];
+    private _titular: PessoaFisica;
 
     // static numeroDeContas = 0
 
-    constructor(conta: string) {
+    constructor(conta: string, titular: PessoaFisica) {
         this._conta = conta;
         this._saldo = 0;
         this._ativo = true;
+        this._titular = titular;
         // Conta.numeroDeContas += 1;
     }
 
@@ -42,6 +45,13 @@ export default class Conta {
     }
     set cartao(novoCartao: Cartao) {
         this._cartoes.push(novoCartao);
+    }
+
+    get titular(): PessoaFisica {
+        return this._titular;
+    }
+    set titular(novoTitular: PessoaFisica) {
+        this._titular = novoTitular;
     }
 
     // * Métodos privados
