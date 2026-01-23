@@ -1,14 +1,15 @@
-export default class PessoaFisica {
+import Contato from "./Contato.js";
 
-    // * Atribuir essa classe em conta
+export default class PessoaFisica {
 
     private _nome: string
     private _cpf: string
-    // Definir class contato
+    private _contato: Contato
 
-    constructor(nome: string, cpf: string) {
+    constructor(nome: string, cpf: string, contato: Contato) {
         this._nome = nome;
         this._cpf = cpf;
+        this._contato = contato;
     }
 
     get nome(): string {
@@ -23,6 +24,13 @@ export default class PessoaFisica {
     }
     set cpf(novoCpf: string) {
         this._cpf = novoCpf;
+    }
+
+    get contato(): Contato {
+        return this._contato;
+    }
+    set contato(contato: Contato) {
+        this._contato = contato;
     }
 
 }
