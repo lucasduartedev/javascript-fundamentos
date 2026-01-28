@@ -2,11 +2,11 @@
 
 ## Objetivo
 
-<p>Colocar em prática os fundamentos de programação orientada a objetos com a linguagem Typescript.</p>
+<p>Colocar em prática fundamentos de programação, lógica de desenvolvimento, programação orientada a objetos, entre outros, com a linguagem Typescript, sendo esse repositório voltado apenas a diversas práticas genéricas e não um projeto único focado em resolver um problema específico.</p>
 
 <p>Typescript será usado para facilitar o desenvolvimento de algumas funcionalidades e evitar erros durante a execução dos scripts.</p>
 
-<p>Jest adicionado ao projeto para aprender/praticar testes unitários.</p>
+<p>Jest adicionado ao projeto para aprender/praticar testes unitários durante a prática de desenvolvimento.</p>
 
 ## Tecnologias
 
